@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/employer_prompt_height"
+                android:id="@+id/rloEmployerPrompt">
+
+    <Button
+        android:text="@string/add_new_employer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnEPAdd"
+        android:background="@color/darkGreen"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/btnEPAdd"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txtEPNewEmployerName"
+        android:textColor="?attr/colorPrimaryDark"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="5dp"/>
+
+    <Button
+        android:text="@string/select_existing_employer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtEPNewEmployerName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/btnEPSelectEmployer"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/white"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btnEPSelectEmployer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/lsvJobEmployers"/>
+</RelativeLayout>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/activity_job"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.rdfmobileapps.jobtracker.ActivityJob">
+
+    <TextView
+        android:id="@+id/txvJobTitle"
+        android:text="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/red"
+        android:textSize="@dimen/title_text_size"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="v0.0.0"
+        android:id="@+id/txvJobVersion"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/txvMainTitle"
+        android:textColor="@color/red"
+        android:textSize="@dimen/version_label_text_size"
+        android:layout_alignBaseline="@+id/txvJobTitle"
+        android:elevation="1dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvJobTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="12dp"
+        android:id="@+id/lloJobTopButtons">
+
+        <Button
+            android:text="@string/save"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_buttons_height"
+            android:id="@+id/btnJobSave"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="onSaveClick"/>
+
+        <Button
+            android:text="@string/cancel"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_buttons_height"
+            android:id="@+id/btnJobCancel"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="onCancelClick"/>
+
+        <Button
+            android:text="@string/add_worklog"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_buttons_height"
+            android:id="@+id/btnJobAddWorkLog"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="onAddWorklogClick"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/job_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lloJobTopButtons"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvJobJobNameLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_alignTop="@+id/txvJobJobNameLbl"
+        android:layout_toEndOf="@+id/txvJobJobNameLbl"
+        android:layout_marginStart="10dp"
+        android:id="@+id/txtJobJobNameVal"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvJobJobNameLbl"/>
+
+    <TextView
+        android:text="@string/employer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvJobJobNameLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvJobEmployerLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_alignTop="@+id/txvJobJobNameLbl"
+        android:layout_toEndOf="@+id/txvJobJobNameLbl"
+        android:layout_marginStart="10dp"
+        android:id="@+id/txtJobEmployerVal"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvJobEmployerLbl"/>
+
+    <Button
+        android:text="..."
+        android:id="@+id/btnJobChooseEmployer"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/txtJobEmployerVal"
+        android:onClick="onChooseEmployerClick"/>
+
+    <TextView
+        android:text="@string/start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvJobEmployerLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvJobStartDateLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtJobStartDateVal"
+        android:layout_toEndOf="@+id/txvJobStartDateLbl"
+        android:layout_alignBaseline="@+id/txvJobStartDateLbl"
+        android:layout_marginLeft="5dp"
+        android:textColor="?attr/colorPrimaryDark"/>
+
+    <Button
+        android:text="@string/choose"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/job_date_button_height"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/btnJobChooseStartDate"
+        android:background="@color/darkGreen"
+        android:textColor="@color/white"
+        android:layout_alignBaseline="@+id/txtJobStartDateVal"/>
+
+    <TextView
+        android:text="@string/end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvJobStartDateLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvJobEndDateLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtJobEndDateVal"
+        android:layout_toEndOf="@+id/txvJobEndDateLbl"
+        android:layout_alignBaseline="@+id/txvJobEndDateLbl"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <Button
+        android:text="@string/choose"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/job_date_button_height"
+        android:id="@+id/btnJobChooseEndDate"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/txtJobEndDateVal"
+        android:background="@color/darkGreen"/>
+
+    <TextView
+        android:text="@string/hourly_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvJobEndDateLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvJobHourlyRateLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/txtJobHourlyRateVal"
+        android:layout_marginLeft="10dp"
+        android:layout_alignBaseline="@+id/txvJobHourlyRateLbl"
+        android:layout_toEndOf="@+id/txvJobHourlyRateLbl"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:text="@string/notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvJobHourlyRateLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvJobNotesLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/job_notes_height"
+        android:ems="10"
+        android:id="@+id/txtJobNotesVal"
+        android:layout_alignTop="@+id/txvJobNotesLbl"
+        android:layout_toEndOf="@+id/txvJobNotesLbl"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:text="@string/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtJobNotesVal"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/txvStatusLbl"
+        android:textColor="@color/firebrick"/>
+
+</RelativeLayout>

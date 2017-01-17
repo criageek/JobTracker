@@ -1,0 +1,33 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="title_text_size">22sp</dimen>
+    <dimen name="version_label_text_size">10sp</dimen>
+
+    // Dimensions for Main Activity
+    <dimen name="main_buttons_height">35dp</dimen>
+    <dimen name="main_bottom_panel_height">35dp</dimen>
+    <dimen name="main_info_button_size">30dp</dimen>
+    // End Dimensions for Main Activity
+
+    // Dimensions for Job Activity
+    <dimen name="job_buttons_height">35dp</dimen>
+    <dimen name="job_bottom_panel_height">35dp</dimen>
+    <dimen name="job_notes_height">85dp</dimen>
+    <dimen name="job_date_button_height">30dp</dimen>
+    // End Dimensions for Job Activity
+
+    <!-- ActivityReleaseNotes dimensions  -->
+    <dimen name="releasenotes_text_size">13sp</dimen>
+    <!-- End ActivityReleaseNotes dimensions -->
+
+    <!-- Employer Prompt dimensions  -->
+    <dimen name="employer_prompt_height">300dp</dimen>
+    <dimen name="employer_prompt_leftright_margin">15dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <!-- End ActivityReleaseNotes dimensions -->
+
+
+</resources>

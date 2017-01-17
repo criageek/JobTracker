@@ -1,0 +1,2 @@
+Version|Date|Title|Description|Affected Files
+1.0.0|2017-01-13|Original Version|Original Version
