@@ -16,7 +16,6 @@ public class ActivityEmployers extends Activity {
     private MyDB mDBHelper;
     private AdapterEmployer mAdapter;
     private ArrayList<RDEmployer> mEmployers;
-
     private ListView mListView;
 
     @Override
@@ -32,7 +31,7 @@ public class ActivityEmployers extends Activity {
         }
         setContentView(R.layout.activity_employers);
         mDBHelper = MyDB.getInstance(this, RDConstants.DBNAME);
-        getEmployersList();
+//        getEmployersList();
         mAdapter = new AdapterEmployer(this, mEmployers);
         setupScreenControls();
     }
@@ -51,16 +50,31 @@ public class ActivityEmployers extends Activity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-//                mSelectedRowSave = position;
-//                selectItem(position);
+                showEmployer(position);
             }
-        });    }
+        });
+    }
+
+    private void showEmployer(int pRowNum) {
+        RDEmployer employer = mEmployers.get(pRowNum);
+        showEmployerActivity(employer);
+    }
 
     public void onNewEmployerClick(View pButton) {
-//        RDEmployer newEmployer = new RDEmployer();
+        RDEmployer newEmployer = new RDEmployer();
+        showEmployerActivity(newEmployer);
+    }
+
+    private void showEmployerActivity(RDEmployer pEmployer) {
         Intent intent = new Intent(this, ActivityEmployer.class);
-//        intent.putExtra(RDConstants.EXTRAKEY_EMPLOYER, newEmployer);
+        intent.putExtra(RDConstants.EXTRAKEY_EMPLOYER, pEmployer);
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getEmployersList();
+        mAdapter.refreshList(mEmployers);
+    }
 }

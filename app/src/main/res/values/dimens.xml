@@ -19,6 +19,13 @@
     <dimen name="job_date_button_height">30dp</dimen>
     // End Dimensions for Job Activity
 
+    // Dimensions for Employer Activity
+    <dimen name="employer_buttons_height">35dp</dimen>
+    <dimen name="employer_bottom_panel_height">35dp</dimen>
+    <dimen name="employer_notes_height">85dp</dimen>
+    <dimen name="employer_date_button_height">30dp</dimen>
+    // End Dimensions for Employer Activity
+
     <!-- ActivityReleaseNotes dimensions  -->
     <dimen name="releasenotes_text_size">13sp</dimen>
     <!-- End ActivityReleaseNotes dimensions -->

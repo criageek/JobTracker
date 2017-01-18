@@ -1,35 +1,364 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
+    android:id="@+id/activity_job"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.rdfmobileapps.jobtracker.ActivityEmployer">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_activity_employer"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/txvEmployerTitle"
+        android:text="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/red"
+        android:textSize="@dimen/title_text_size"
+        tools:text="@string/employer"/>
 
-</android.support.design.widget.CoordinatorLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvEmployerTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="12dp"
+        android:id="@+id/lloEmployerTopButtons">
+
+        <Button
+            android:text="@string/save"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/employer_buttons_height"
+            android:id="@+id/btnEmployerSave"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="onSaveClick"/>
+
+        <Button
+            android:text="@string/cancel"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/job_buttons_height"
+            android:id="@+id/btnEmployerCancel"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="onCancelClick"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/employer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lloEmployerTopButtons"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvEmpEmployerNameLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_toEndOf="@+id/txvEmpEmployerNameLbl"
+        android:layout_marginStart="10dp"
+        android:id="@+id/txtEmpEmployerNameVal"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvEmpEmployerNameLbl"/>
+
+    <TextView
+        android:text="@string/contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvEmpEmployerNameLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvEmpContactLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_toEndOf="@+id/txvEmpContactLbl"
+        android:layout_marginStart="10dp"
+        android:id="@+id/txtEmpContactVal"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvEmpContactLbl"/>
+
+    <TextView
+        android:text="@string/street"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvEmpContactLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txvEmpStreetLbl"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:layout_toEndOf="@+id/txvEmpStreetLbl"
+        android:layout_marginStart="10dp"
+        android:id="@+id/txtEmpStreetVal"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvEmpStreetLbl"/>
+
+    <TextView
+        android:text="@string/city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txvEmpCityLbl"
+        android:layout_below="@+id/txvEmpStreetLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:textColor="@color/firebrick"
+        android:gravity="end"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_toEndOf="@+id/txvEmpCityLbl"
+        android:ems="10"
+        android:id="@+id/txtEmpCityVal"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvEmpCityLbl"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtEmpCityVal"
+        android:id="@+id/lloEmpCityState"
+        android:weightSum="6"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/rloEmpState"
+            android:layout_weight="3">
+
+            <TextView
+                android:text="@string/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txvEmpStateLbl"
+                android:textColor="@color/firebrick"
+                android:gravity="end"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txvEmpStateLbl"
+                android:ems="10"
+                android:layout_marginStart="5dp"
+                android:id="@+id/txtEmpStateVal"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_alignBaseline="@+id/txvEmpStateLbl"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:id="@+id/rloEmpCity"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:text="@string/zipcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txvEmpZipcodeLbl"
+                android:textColor="@color/firebrick"
+                android:gravity="end"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txvEmpZipcodeLbl"
+                android:ems="10"
+                android:layout_marginStart="5dp"
+                android:id="@+id/txtEmpZipcodeVal"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_alignBaseline="@+id/txvEmpZipcodeLbl"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lloEmpCityState"
+        android:id="@+id/lloEmpPhone"
+        android:weightSum="2"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/rloEmpPhoneCell"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="@string/phone_cell_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txvEmpPhoneCellLbl"
+                android:textColor="@color/firebrick"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txvEmpPhoneCellLbl"
+                android:ems="10"
+                android:layout_marginStart="5dp"
+                android:id="@+id/txtEmpPhoneCellVal"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_alignBaseline="@+id/txvEmpPhoneCellLbl"
+                android:inputType="phone"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/rloEmpPhoneAlt"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:text="@string/phone_alt_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txvEmpPhoneAltLbl"
+                android:textColor="@color/firebrick"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txvEmpPhoneAltLbl"
+                android:ems="10"
+                android:layout_marginStart="5dp"
+                android:id="@+id/txtEmpPhoneAltVal"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_alignBaseline="@+id/txvEmpPhoneAltLbl"
+                android:inputType="phone"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/email1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txvEmpEmail1Lbl"
+        android:layout_below="@+id/lloEmpPhone"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/firebrick"
+        android:gravity="end"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:layout_toEndOf="@+id/txvEmpEmail1Lbl"
+        android:ems="10"
+        android:id="@+id/txtEmpEmail1Val"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvEmpEmail1Lbl"/>
+
+    <TextView
+        android:text="@string/email2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txvEmpEmail2Lbl"
+        android:layout_below="@+id/txvEmpEmail1Lbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:layout_toEndOf="@+id/txvEmpEmail2Lbl"
+        android:ems="10"
+        android:id="@+id/txtEmpEmail2Val"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvEmpEmail2Lbl"/>
+
+    <TextView
+        android:text="@string/website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txvEmpWebsiteLbl"
+        android:layout_below="@+id/txvEmpEmail2Lbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:layout_toEndOf="@+id/txvEmpWebsiteLbl"
+        android:ems="10"
+        android:id="@+id/txtEmpWebsiteVal"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignBaseline="@+id/txvEmpWebsiteLbl"/>
+
+    <TextView
+        android:text="@string/notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txvEmpNotesLbl"
+        android:layout_below="@+id/txvEmpWebsiteLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:textColor="@color/firebrick"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/employer_notes_height"
+        android:inputType="none"
+        android:layout_toEndOf="@+id/txvEmpNotesLbl"
+        android:ems="10"
+        android:id="@+id/txtEmpNotesVal"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignTop="@+id/txvEmpNotesLbl"
+        android:gravity="top|center_vertical"/>
+
+    <TextView
+        android:text="Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lloEmployerTopButtons"
+        android:layout_alignParentStart="true"
+        android:id="@+id/txvEmpId"
+        android:textColor="@color/red"/>
+
+
+</RelativeLayout>

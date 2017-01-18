@@ -6,6 +6,20 @@
     <string name="release_notes">Release Notes</string>
     <string name="add_new_employer">Add New Employer</string>
     <string name="select_existing_employer">Select Existing Employer</string>
+    <string name="employer_name">Emp Name</string>
+    <string name="contact">Contact</string>
+    <string name="street">Street</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="state_abbrev">St</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="phone_cell">Cell Phone</string>
+    <string name="phone_alt">Alt Phone</string>
+    <string name="phone_cell_short">Cell#</string>
+    <string name="phone_alt_short">Alt#</string>
+    <string name="email1">e-Mail 1</string>
+    <string name="email2">e-Mail 2</string>
+    <string name="website">Website</string>
 
     <color name="deepMidnightBlue">#06063d</color>
     <color name="charcoalGray">#80747D7D</color>

@@ -19,6 +19,7 @@ public class RDConstants {
 /*  Intent Extra Key constants                                     */
 /*******************************************************************/
 	public static final String EXTRAKEY_JOB = "JOB";
+	public static final String EXTRAKEY_EMPLOYER = "EMPLOYER";
 
 /*******************************************************************/
 /*  Intent Request constants                                       */

@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * Created by rich on 1/14/17.
  */
 
-public class RDEmployer {
+public class RDEmployer implements Parcelable {
     private int mId;
     private String mEmployerName;
     private String mContactName;
@@ -326,4 +328,57 @@ public class RDEmployer {
         cursor.close();
         return employer;
     }
+
+//  Parcelable Implementation
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(this.mId);
+        out.writeString(this.mEmployerName);
+        out.writeString(this.mContactName);
+        out.writeString(this.mStreetAddress);
+        out.writeString(this.mCity);
+        out.writeString(this.mState);
+        out.writeString(this.mZipCode);
+        out.writeString(this.mPhoneCell);
+        out.writeString(this.mPhoneAlt);
+        out.writeString(this.mEmail1);
+        out.writeString(this.mEmail2);
+        out.writeString(this.mWebsite);
+        out.writeInt(this.mStatus.getValue());
+        out.writeString(this.mNotes);
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<RDEmployer> CREATOR = new Parcelable.Creator<RDEmployer>() {
+        public RDEmployer createFromParcel(Parcel in) {
+            return new RDEmployer(in);
+        }
+
+        public RDEmployer[] newArray(int size) {
+            return new RDEmployer[size];
+        }
+    };
+
+    // example constructor that takes a Parcel and gives you an object populated with it's values
+    private RDEmployer(Parcel in) {
+        this.mId = in.readInt();
+        this.mEmployerName = in.readString();
+        this.mContactName = in.readString();
+        this.mStreetAddress = in.readString();
+        this.mCity = in.readString();
+        this.mState = in.readString();
+        this.mZipCode = in.readString();
+        this.mPhoneCell = in.readString();
+        this.mPhoneAlt = in.readString();
+        this.mEmail1 = in.readString();
+        this.mEmail2 = in.readString();
+        this.mWebsite = in.readString();
+        this.mStatus = RDStatus.valueOf(in.readInt());
+        this.mNotes = in.readString();
+    }
+
 }
