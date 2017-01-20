@@ -56,6 +56,7 @@
     <string name="notes">Notes</string>
     <string name="status">Status</string>
     <string name="choose">Choose</string>
+    <string name="show_all">Show All</string>
     <string name="title_activity_employer">ActivityEmployer</string>
 
 </resources>

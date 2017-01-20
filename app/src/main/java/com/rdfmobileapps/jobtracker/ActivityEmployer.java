@@ -12,9 +12,15 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityEmployer extends Activity implements TextWatcher {
 
@@ -36,6 +42,8 @@ public class ActivityEmployer extends Activity implements TextWatcher {
     private EditText mEmail2Edit;
     private EditText mWebsiteEdit;
     private EditText mNotesEdit;
+    private RadioButton mActiveRadioButton;
+    private RadioButton mInactiveRadioButton;
     private Button mSaveButton;
     private Button mCancelButton;
 
@@ -82,9 +90,17 @@ public class ActivityEmployer extends Activity implements TextWatcher {
         mEmail2Edit.addTextChangedListener(this);
         mWebsiteEdit.addTextChangedListener(this);
         mNotesEdit.addTextChangedListener(this);
+        setupRadioButtons();
         setupButtons();
         loadData();
         setButtons();
+    }
+
+    private void setupRadioButtons() {
+        mActiveRadioButton = (RadioButton)findViewById(R.id.radEmpActive);
+        mActiveRadioButton.setText(RDStatus.Active.toString());
+        mInactiveRadioButton = (RadioButton)findViewById(R.id.radEmpInactive);
+        mInactiveRadioButton.setText(RDStatus.InActive.toString());
     }
 
     private void setupButtons() {
@@ -110,6 +126,11 @@ public class ActivityEmployer extends Activity implements TextWatcher {
         mEmail2Edit.setText(mEmployer.getEmail2());
         mWebsiteEdit.setText(mEmployer.getWebsite());
         mNotesEdit.setText(mEmployer.getNotes());
+        if (mEmployer.getStatus() == RDStatus.Active) {
+            mActiveRadioButton.setChecked(true);
+        } else {
+            mInactiveRadioButton.setChecked(true);
+        }
         mLoading = false;
     }
 
@@ -135,6 +156,13 @@ public class ActivityEmployer extends Activity implements TextWatcher {
         return true;
     }
 
+    private RDStatus getSelectedStatus() {
+        if (mActiveRadioButton.isChecked())
+            return RDStatus.Active;
+        else
+            return RDStatus.InActive;
+    }
+
     public void onSaveClick(View pButton) {
         if (dataOk()) {
             mEmployer.setEmployerName(mEmployerNameEdit.getText().toString());
@@ -149,6 +177,7 @@ public class ActivityEmployer extends Activity implements TextWatcher {
             mEmployer.setEmail2(mEmail2Edit.getText().toString());
             mEmployer.setWebsite(mWebsiteEdit.getText().toString());
             mEmployer.setNotes(mNotesEdit.getText().toString());
+            mEmployer.setStatus(getSelectedStatus());
             mEmployer.save(mDBHelper);
             finish();
         }
@@ -158,6 +187,13 @@ public class ActivityEmployer extends Activity implements TextWatcher {
         loadData();
         mEditing = false;
         setButtons();
+    }
+
+    public void onRadioButtonClick(View pButton) {
+        if ( !mLoading ) {
+            mEditing = true;
+            setButtons();
+        }
     }
 
 //  TextWatcher Methods

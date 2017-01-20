@@ -8,6 +8,7 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class ActivityEmployers extends Activity {
     private AdapterEmployer mAdapter;
     private ArrayList<RDEmployer> mEmployers;
     private ListView mListView;
+    private CheckBox mShowAllCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +39,17 @@ public class ActivityEmployers extends Activity {
     }
 
     private void setupScreenControls() {
+        setupCheckBox();
         setupListView();
     }
 
     private void getEmployersList() {
-        mEmployers = RDEmployer.employersList(mDBHelper, true);
+        mEmployers = RDEmployer.employersList(mDBHelper, !mShowAllCheckBox.isChecked());
+    }
+
+    private void setupCheckBox() {
+        mShowAllCheckBox = (CheckBox)findViewById(R.id.chkEmpsShowAll);
+        mShowAllCheckBox.setChecked(false);
     }
 
     private void setupListView() {
@@ -63,6 +71,11 @@ public class ActivityEmployers extends Activity {
     public void onNewEmployerClick(View pButton) {
         RDEmployer newEmployer = new RDEmployer();
         showEmployerActivity(newEmployer);
+    }
+
+    public void onShowAllClick(View pButton) {
+        getEmployersList();
+        mAdapter.refreshList(mEmployers);
     }
 
     private void showEmployerActivity(RDEmployer pEmployer) {

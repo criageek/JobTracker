@@ -44,4 +44,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:id="@+id/lsvEmployers"/>
+
+    <CheckBox
+        android:text="@string/show_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chkEmpsShowAll"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/firebrick"
+        android:onClick="onShowAllClick"/>
 </RelativeLayout>

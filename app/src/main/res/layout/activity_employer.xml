@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/txvEmployerTitle"
-        android:text="@string/app_name"
+        android:text="@string/employer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -331,11 +331,21 @@
         android:layout_alignBaseline="@+id/txvEmpWebsiteLbl"/>
 
     <TextView
+        android:text="@string/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txvEmpStatusLbl"
+        android:layout_below="@+id/txvEmpWebsiteLbl"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp"
+        android:textColor="@color/firebrick"/>
+
+    <TextView
         android:text="@string/notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txvEmpNotesLbl"
-        android:layout_below="@+id/txvEmpWebsiteLbl"
+        android:layout_below="@+id/rgpEmpStatus"
         android:layout_alignParentStart="true"
         android:layout_marginTop="23dp"
         android:textColor="@color/firebrick"/>
@@ -360,5 +370,30 @@
         android:id="@+id/txvEmpId"
         android:textColor="@color/red"/>
 
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/radEmpActive"
+        android:layout_below="@+id/txvEmpStatusLbl"
+        android:id="@+id/rgpEmpStatus">
+
+        <RadioButton
+            android:text="RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radEmpActive"
+            android:textColor="@color/colorPrimaryDark"
+            android:onClick="onRadioButtonClick"/>
+
+        <RadioButton
+            android:text="RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radEmpInactive"
+            android:textColor="@color/colorPrimaryDark"
+            android:onClick="onRadioButtonClick"/>
+    </RadioGroup>
 
 </RelativeLayout>
