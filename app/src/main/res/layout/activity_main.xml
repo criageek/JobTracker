@@ -10,44 +10,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.rdfmobileapps.jobtracker.ActivityMain"
-    android:background="@color/white">
+    android:background="@color/white"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/txvMainTitle"
-        android:text="@string/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/red"
-        android:textSize="@dimen/title_text_size"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="v0.0.0"
-        android:id="@+id/txvMainVersion"
-        android:layout_alignParentRight="true"
-        android:layout_alignBottom="@+id/txvMainTitle"
-        android:textColor="@color/red"
-        android:textSize="@dimen/version_label_text_size"/>
-
-    <Button
-        android:text="@string/new_job"
+    <com.rdfmobileapps.jobtracker.RDTopButtons
         android:layout_width="match_parent"
-        android:layout_height="@dimen/main_buttons_height"
-        android:id="@+id/btnMainNewJob"
-        android:layout_weight=".33"
-        android:layout_below="@+id/txvMainTitle"
-        android:layout_centerInParent="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/white"
-        android:onClick="newJobClick"/>
+        android:layout_height="@dimen/top_button_height"
+        android:id="@+id/rdtbMain"
+        custom:saveButtonVisible="false"
+        custom:cancelButtonVisible="false"
+        custom:customButtonVisible="true"
+        custom:customButtonText="@string/new_job"
+        custom:vibrateOnClick="true">
+    </com.rdfmobileapps.jobtracker.RDTopButtons>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -84,11 +59,12 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/btnMainNewJob"
+        android:layout_below="@+id/rdtbMain"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
-        android:layout_above="@+id/rloMainBottomPanel"/>
+        android:layout_above="@+id/rloMainBottomPanel"
+        android:id="@+id/lsvMainJobs"/>
 
 
 </RelativeLayout>

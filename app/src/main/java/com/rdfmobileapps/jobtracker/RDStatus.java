@@ -11,7 +11,7 @@ public enum RDStatus {
     None("None", 0),
     Started("Started", 1),
     Complete("Complete", 2),
-    Cancel("Cancel", 3),
+    Canceled("Canceled", 3),
     Active("Active", 4),
     InActive("Inactive", 5);
 

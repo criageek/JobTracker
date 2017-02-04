@@ -2,7 +2,10 @@
 <manifest package="com.rdfmobileapps.jobtracker"
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionCode="1"
+          android:theme="@style/CustomTheme"
           android:versionName="1.0.0">
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -28,10 +31,16 @@
         <activity android:name=".ActivityEmployers">
         </activity>
         <activity
-            android:name=".ActivityEmployer"
-            android:label="@string/title_activity_employer"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ActivityEmployer">
         </activity>
+        <activity android:name=".ActivityWorklogs">
+        </activity>
+        <activity android:name=".ActivityWorklog">
+        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
     </application>
 
 </manifest>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_worklog"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.rdfmobileapps.jobtracker.ActivityWorklog">
+
+    <TextView
+        android:id="@+id/txvWLDTitle"
+        android:text="@string/worklog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/title_text_color_normal"
+        android:textSize="@dimen/title_text_size"/>
+
+    <com.rdfmobileapps.jobtracker.RDTopButtons
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_button_height"
+        android:id="@+id/rdtbWorklog"
+        custom:saveButtonVisible="true"
+        custom:cancelButtonVisible="true"
+        custom:customButtonVisible="true"
+        custom:customButtonText="@string/custom"
+        custom:vibrateOnClick="true"
+        android:layout_below="@+id/txvWLDJobName"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+    </com.rdfmobileapps.jobtracker.RDTopButtons>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvWLDTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/txvWLDJobName"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/wld_text_size"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scvWorklog"
+        android:layout_below="@+id/rdtbWorklog">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rloWorklogData">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_border"
+                android:id="@+id/rloWLDTimes"
+                android:layout_below="@+id/ibtWLDSpeak">
+
+                <TextView
+                    android:text="@string/times"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/txvWLDTimesTitle"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/title_text_color_normal"
+                    android:textSize="@dimen/wld_text_size"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lloWLDStartTime"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="20"
+                    android:layout_below="@+id/txvWLDTimesTitle">
+
+                    <TextView
+                        android:text="@string/start"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txvWLDStartTimeLbl"
+                        android:textColor="@color/label_text_color_normal"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:textColor="@color/value_text_color_normal"
+                        android:background="@color/selectable_entry_field_color"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/txvWLDStartDateVal"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="8"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="textPersonName"
+                        android:text="Name"
+                        android:id="@+id/txvWLDStartTimeVal"
+                        android:textColor="@color/value_text_color_normal"
+                        android:background="@color/selectable_entry_field_color"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="7"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/speak_button_height"
+                        android:id="@+id/ibtWLDStartTime"
+                        android:onClick="onSpeakStartTimeClick"
+                        android:src="@drawable/microphone_20x20"
+                        android:layout_weight="2"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/lloWLDEndTime"
+                    android:layout_below="@+id/lloWLDStartTime"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="20"
+                    android:layout_height="@dimen/wld_row_height" >
+
+                    <TextView
+                        android:text="@string/end"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txvWLDEndTimeLbl"
+                        android:textColor="@color/label_text_color_normal"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:textColor="@color/value_text_color_normal"
+                        android:background="@color/selectable_entry_field_color"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/txvWLDEndDateVal"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="8"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="textPersonName"
+                        android:text="Name"
+                        android:id="@+id/txvWLDEndTimeVal"
+                        android:textColor="@color/value_text_color_normal"
+                        android:background="@color/selectable_entry_field_color"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="7"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/speak_button_height"
+                        android:id="@+id/ibtWLDEndTime"
+                        android:onClick="onSpeakStartTimeClick"
+                        android:src="@drawable/microphone_20x20"
+                        android:layout_weight="2"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/lloWLDTotalTime"
+                    android:layout_below="@+id/lloWLDEndTime"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="20"
+                    android:layout_height="@dimen/wld_row_height"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:text="@string/total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txvWLDTotalTimeLbl"
+                        android:textColor="@color/label_text_color_normal"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:textColor="@color/value_text_color_normal"
+                        android:background="@color/selectable_entry_field_color"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/txvWLDTotalTimeVal"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="15"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"/>
+
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/speak_button_height"
+                        android:id="@+id/ibtWLDTotalTime"
+                        android:onClick="onSpeakStartTimeClick"
+                        android:src="@drawable/microphone_20x20"
+                        android:layout_weight="2"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/microphone_30x30"
+                android:id="@+id/ibtWLDSpeak"
+                android:onClick="onSpeakClick"
+                android:src="@drawable/microphone_30x30"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rloWLDTimes"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/background_border"
+                android:layout_marginTop="10dp"
+                android:id="@+id/rloWLDMiles">
+
+                <TextView
+                    android:text="@string/miles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/txvWLDMilesTitle"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/title_text_color_normal"
+                    android:textSize="@dimen/wld_text_size"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/lloWLDMilesHeadings"
+                    android:weightSum="3"
+                    android:layout_below="@+id/txvWLDMilesTitle">
+
+                    <TextView
+                        android:text="@string/start"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/txvWLDStartMilesLbl"
+                        android:textColor="@color/label_text_color_normal"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/wld_text_size"/>
+
+                    <TextView
+                        android:text="@string/end"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/txvWLDEndMilesLbl"
+                        android:textColor="@color/label_text_color_normal"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/wld_text_size"/>
+
+                    <TextView
+                        android:text="@string/total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/txvWLDTotalMilesLbl"
+                        android:textColor="@color/label_text_color_normal"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/wld_text_size"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/wld_row_height"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentStart="false"
+                    android:id="@+id/lloWLDMilesValues"
+                    android:layout_below="@+id/lloWLDMilesHeadings"
+                    >
+
+                    <EditText
+                        android:text="888888.8"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/value_text_color_normal"
+                        android:background="@color/selectable_entry_field_color"
+                        android:layout_centerVertical="false"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:id="@+id/txtWLDStartMilesVal"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:inputType="numberDecimal"/>
+
+                    <EditText
+                        android:text="TextView"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/value_text_color_normal"
+                        android:background="@color/selectable_entry_field_color"
+                        android:layout_centerVertical="false"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:id="@+id/txtWLDEndMilesVal"
+                        android:textSize="@dimen/wld_text_size"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:inputType="numberDecimal"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Name"
+                        android:ems="10"
+                        android:layout_toEndOf="@+id/txvWLDTotalMilesLbl"
+                        android:id="@+id/txtWLDTotalMilesVal"
+                        android:textColor="@color/value_text_color_normal"
+                        android:background="@color/selectable_entry_field_color"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:inputType="numberDecimal"
+                        android:textSize="@dimen/wld_text_size"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/lloWLDMilesSpeakButtons"
+                    android:layout_below="@+id/lloWLDMilesValues"
+                    android:layout_marginTop="10dp">
+
+                    <ImageButton
+                        android:layout_height="@dimen/speak_button_height"
+                        app:srcCompat="@drawable/microphone_20x20"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/ibtWLDStartMiles"
+                        android:layout_marginRight="5dp"
+                        android:layout_centerVertical="true"
+                        android:onClick="onSpeakStartMilesClick"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:src="@drawable/microphone_20x20"/>
+
+                    <ImageButton
+                        android:layout_height="@dimen/speak_button_height"
+                        app:srcCompat="@drawable/microphone_20x20"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/ibtWLDEndMiles"
+                        android:layout_marginRight="5dp"
+                        android:layout_centerVertical="true"
+                        android:onClick="onSpeakEndMilesClick"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:src="@drawable/microphone_20x20"/>
+
+                    <ImageButton
+                        android:layout_height="@dimen/speak_button_height"
+                        app:srcCompat="@drawable/microphone_20x20"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/ibtWLDTotalMiles"
+                        android:layout_marginRight="5dp"
+                        android:layout_centerVertical="true"
+                        android:onClick="onSpeakTotalMilesClick"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:src="@drawable/microphone_20x20"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_alignParentTop="false"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/txtWLDNotes"
+                android:layout_below="@+id/rgpWLDStatus"
+                android:hint="@string/notes"
+                android:layout_marginTop="5dp"
+                android:inputType="textCapSentences"
+                android:textSize="@dimen/wld_text_size"/>
+
+            <TextView
+                android:text="@string/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rloWLDMiles"
+                android:id="@+id/txvWLDStatusLbl"
+                android:textColor="@color/firebrick"
+                android:layout_marginTop="10dp"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txvWLDStatusLbl"
+                android:id="@+id/rgpWLDStatus"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:text="RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radWLDActive"
+                    android:layout_weight="1"
+                    android:textColor="@color/value_text_color_normal"
+                    android:onClick="onRadioButtonClick"/>
+
+                <RadioButton
+                    android:text="RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radWLDComplete"
+                    android:layout_weight="1"
+                    android:textColor="@color/value_text_color_normal"
+                    android:onClick="onRadioButtonClick"/>
+
+                <RadioButton
+                    android:text="RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radWLDCancel"
+                    android:layout_weight="1"
+                    android:textColor="@color/value_text_color_normal"
+                    android:onClick="onRadioButtonClick"/>
+
+            </RadioGroup>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

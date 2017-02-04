@@ -1,28 +1,22 @@
 package com.rdfmobileapps.jobtracker;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ActivityEmployer extends Activity implements TextWatcher {
+public class ActivityEmployer extends AppCompatActivity implements TextWatcher {
 
     private MyDB mDBHelper;
     private RDEmployer mEmployer;
@@ -44,8 +38,9 @@ public class ActivityEmployer extends Activity implements TextWatcher {
     private EditText mNotesEdit;
     private RadioButton mActiveRadioButton;
     private RadioButton mInactiveRadioButton;
-    private Button mSaveButton;
-    private Button mCancelButton;
+//    private Button mSaveButton;
+//    private Button mCancelButton;
+    private RDTopButtons mTopButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +56,19 @@ public class ActivityEmployer extends Activity implements TextWatcher {
         setContentView(R.layout.activity_employer);
         mDBHelper = MyDB.getInstance(this, RDConstants.DBNAME);
         mEmployer = (RDEmployer)getIntent().getParcelableExtra(RDConstants.EXTRAKEY_EMPLOYER);
+        setupCustomActionBar();
         setupScreenControls();
+    }
+
+    private void setupCustomActionBar() {
+        ActionBar mActionBar = this.getSupportActionBar();
+        mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        mActionBar.setCustomView(R.layout.custom_action_bar_layout);
+        View view = getSupportActionBar().getCustomView();
+        TextView version = (TextView)findViewById(R.id.txvABVersion);
+        RDVersion versionInfo = new RDVersion(this);
+        version.setText(versionInfo.getVersionNum(true));
     }
 
     private void setupScreenControls() {
@@ -104,8 +111,44 @@ public class ActivityEmployer extends Activity implements TextWatcher {
     }
 
     private void setupButtons() {
-        mSaveButton = (Button)findViewById(R.id.btnEmployerSave);
-        mCancelButton = (Button)findViewById(R.id.btnEmployerCancel);
+//        mSaveButton = (Button)findViewById(R.id.btnEmployerSave);
+//        mCancelButton = (Button)findViewById(R.id.btnEmployerCancel);
+        mTopButtons = (RDTopButtons)findViewById(R.id.rdtbEmployer);
+        mTopButtons.setCustomButtonVisible(false);
+        mTopButtons.setOnRDTBClickedListener(new RDTopButtons.OnRDTBClickedListener() {
+            @Override
+            public void onCancelClick() {
+                loadData();
+                mEditing = false;
+                setButtons();
+            }
+
+            @Override
+            public void onSaveClick() {
+                if (dataOk()) {
+                    mEmployer.setEmployerName(mEmployerNameEdit.getText().toString());
+                    mEmployer.setContactName(mContactEdit.getText().toString());
+                    mEmployer.setStreetAddress(mStreetEdit.getText().toString());
+                    mEmployer.setCity(mCityEdit.getText().toString());
+                    mEmployer.setState(mStateEdit.getText().toString());
+                    mEmployer.setZipCode(mZipcodeEdit.getText().toString());
+                    mEmployer.setPhoneCell(mPhoneCellEdit.getText().toString());
+                    mEmployer.setPhoneAlt(mPhoneAltEdit.getText().toString());
+                    mEmployer.setEmail1(mEmail1Edit.getText().toString());
+                    mEmployer.setEmail2(mEmail2Edit.getText().toString());
+                    mEmployer.setWebsite(mWebsiteEdit.getText().toString());
+                    mEmployer.setNotes(mNotesEdit.getText().toString());
+                    mEmployer.setStatus(getSelectedStatus());
+                    mEmployer.save(mDBHelper);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCustomClick() {
+
+            }
+        });
     }
 
     private void loadData() {
@@ -143,13 +186,14 @@ public class ActivityEmployer extends Activity implements TextWatcher {
             mCancelButton.setVisibility(View.INVISIBLE);
         }
 */
-        if (mEditing) {
+/*        if (mEditing) {
             mSaveButton.setVisibility(View.VISIBLE);
             mCancelButton.setVisibility(View.VISIBLE);
         } else {
             mSaveButton.setVisibility(View.INVISIBLE);
             mCancelButton.setVisibility(View.INVISIBLE);
-        }
+        } */
+        mTopButtons.setEditing(mEditing);
     }
 
     private boolean dataOk() {
@@ -162,7 +206,7 @@ public class ActivityEmployer extends Activity implements TextWatcher {
         else
             return RDStatus.InActive;
     }
-
+/*
     public void onSaveClick(View pButton) {
         if (dataOk()) {
             mEmployer.setEmployerName(mEmployerNameEdit.getText().toString());
@@ -188,12 +232,34 @@ public class ActivityEmployer extends Activity implements TextWatcher {
         mEditing = false;
         setButtons();
     }
-
+*/
     public void onRadioButtonClick(View pButton) {
         if ( !mLoading ) {
             mEditing = true;
             setButtons();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_activity_employer, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //respond to menu item selection
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                handleDelete();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void handleDelete() {
+
     }
 
 //  TextWatcher Methods

@@ -17,12 +17,14 @@
     <dimen name="job_bottom_panel_height">35dp</dimen>
     <dimen name="job_notes_height">85dp</dimen>
     <dimen name="job_date_button_height">30dp</dimen>
+    <dimen name="job_text_size">16sp</dimen>
     // End Dimensions for Job Activity
 
     // Dimensions for Employer Activity
     <dimen name="employer_buttons_height">35dp</dimen>
     <dimen name="employer_bottom_panel_height">35dp</dimen>
     <dimen name="employer_notes_height">85dp</dimen>
+    <dimen name="employer_row_height">35dp</dimen>
     <dimen name="employer_date_button_height">30dp</dimen>
     // End Dimensions for Employer Activity
 
@@ -32,9 +34,33 @@
 
     <!-- Employer Prompt dimensions  -->
     <dimen name="employer_prompt_height">300dp</dimen>
+    <dimen name="employer_prompt_title_text_size">18sp</dimen>
     <dimen name="employer_prompt_leftright_margin">15dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <!-- End ActivityReleaseNotes dimensions -->
 
+    <!-- Single List Item dimensions  -->
+    <dimen name="single_list_item_height">30dp</dimen>
+    <dimen name="single_list_item_tall_height">45dp</dimen>
+    <!-- End Single List Item dimensions  -->
+
+    <dimen name="speak_button_width">40dp</dimen>
+    <dimen name="speak_button_height">40dp</dimen>
+
+    <!-- ActivityWorklog dimensions  -->
+    <dimen name="wld_text_size">18sp</dimen>
+    <dimen name="wld_row_height">35dp</dimen>
+    <!-- End Single List Item dimensions  -->
+
+    <!--  Top Button Dimensions  -->
+    <dimen name="top_button_height">35dp</dimen>
+    <dimen name="top_button_text_size">16sp</dimen>
+    <!--  End Top Button Dimensions  -->
+
+    <!--  Custom Action Bar Dimensions  -->
+    <dimen name="ab_height">50dp</dimen>
+    <dimen name="ab_version_text_size">12sp</dimen>
+    <dimen name="ab_title_text_size">26sp</dimen>
+    <!--  End Custom Action Bar Dimensions  -->
 
 </resources>

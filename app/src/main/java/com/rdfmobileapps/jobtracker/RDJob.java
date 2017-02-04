@@ -1,11 +1,14 @@
 package com.rdfmobileapps.jobtracker;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by rich on 1/12/17.
@@ -21,6 +24,10 @@ public class RDJob implements Parcelable {
     private String mNotes;
     private RDStatus mStatus;
 
+    private static String[] allColumns = { MyDB.COL_JOBS_ID, MyDB.COL_JOBS_JOBNAME,
+            MyDB.COL_JOBS_EMPLOYERID, MyDB.COL_JOBS_STARTDATE, MyDB.COL_JOBS_ENDDATE,
+            MyDB.COL_JOBS_HOURLYRATE, MyDB.COL_JOBS_NOTES, MyDB.COL_JOBS_STATUS };
+    
 //  Constructors
 
     public RDJob() {
@@ -69,7 +76,7 @@ public class RDJob implements Parcelable {
         mEndDate = RDFunctions.currentDateStr(RDConstants.DATE_FORMAT_SHORT_YEARFIRST);
         mHourlyRate = 10.00;
         mNotes = "";
-        mStatus = RDStatus.Started;
+        mStatus = RDStatus.Active;
     }
 
     private ContentValues addContentValues(boolean pIncludeKey) {
@@ -174,6 +181,44 @@ public class RDJob implements Parcelable {
 
     public void setStatus(RDStatus pStatus) {
         mStatus = pStatus;
+    }
+
+//  Static Methods
+
+    public static ArrayList<RDJob> jobsList(MyDB pDB,
+                                            boolean pActiveOnly) {
+        ArrayList<RDJob> list = new ArrayList<RDJob>();
+        String tables = MyDB.TBL_JOBS;
+        String[] columns = allColumns;
+        String where = "";
+        if ( pActiveOnly ) {
+            where = MyDB.COL_JOBS_STATUS + " = " + RDStatus.Active.getValue();
+        }
+        String[] whereArgs = { };
+        String groupBy = "";
+        String having = "";
+        String orderBy = "";
+//  rdfrahm  20170121  order by date instead??
+        orderBy = MyDB.COL_JOBS_JOBNAME + " asc";
+        SQLiteDatabase database = pDB.getWritableDatabase();
+        Cursor cursor = database.query(tables, columns, where, whereArgs,
+                groupBy, having, orderBy);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            RDJob job = new RDJob();
+            job.setId(cursor.getInt(0));
+            job.setJobName(cursor.getString(1));
+            job.setEmployerId(cursor.getInt(2));
+            job.setStartDate(cursor.getString(3));
+            job.setEndDate(cursor.getString(4));
+            job.setHourlyRate(cursor.getDouble(5));
+            job.setNotes(cursor.getString(6));
+            job.setStatus(RDStatus.valueOf(cursor.getInt(7)));
+            list.add(job);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
     }
 
 //  Parcelable Implementation

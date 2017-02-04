@@ -1,12 +1,11 @@
 package com.rdfmobileapps.jobtracker;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
@@ -14,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActivityAbout extends Activity {
+public class ActivityAbout extends AppCompatActivity {
 
     private RDVersion versionInfo;
 
@@ -31,7 +30,19 @@ public class ActivityAbout extends Activity {
         }
         setContentView(R.layout.activity_about);
         this.versionInfo = new RDVersion(this);
+        setupCustomActionBar();
         setupData();
+    }
+
+    private void setupCustomActionBar() {
+        ActionBar mActionBar = this.getSupportActionBar();
+        mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        mActionBar.setCustomView(R.layout.custom_action_bar_layout);
+//        View view =getSupportActionBar().getCustomView();
+        TextView version = (TextView)findViewById(R.id.txvABVersion);
+        RDVersion versionInfo = new RDVersion(this);
+        version.setText(versionInfo.getVersionNum(true));
     }
 
     private void setupData() {

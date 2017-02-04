@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="com.rdfmobileapps.jobtracker.RDTopButtons">
+        <attr name="cancelButtonVisible" format="boolean" />
+        <attr name="saveButtonVisible" format="boolean" />
+        <attr name="customButtonVisible" format="boolean" />
+        <attr name="vibrateOnClick" format="boolean" />
+        <attr name="editing" format="boolean" />
+        <attr name="customButtonText" format="string" />
+    </declare-styleable>
+</resources>

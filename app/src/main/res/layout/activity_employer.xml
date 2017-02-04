@@ -3,6 +3,7 @@
     android:id="@+id/activity_job"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -22,378 +23,477 @@
         android:textSize="@dimen/title_text_size"
         tools:text="@string/employer"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <com.rdfmobileapps.jobtracker.RDTopButtons
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/top_button_height"
+        android:id="@+id/rdtbEmployer"
+        custom:saveButtonVisible="true"
+        custom:cancelButtonVisible="true"
+        custom:customButtonVisible="true"
+        custom:customButtonText="@string/custom"
+        custom:vibrateOnClick="true"
         android:layout_below="@+id/txvEmployerTitle"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp"
-        android:id="@+id/lloEmployerTopButtons">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+    </com.rdfmobileapps.jobtracker.RDTopButtons>
 
-        <Button
-            android:text="@string/save"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/employer_buttons_height"
-            android:id="@+id/btnEmployerSave"
-            android:layout_weight="1"
-            android:background="@android:color/holo_green_dark"
-            android:textColor="@color/white"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:onClick="onSaveClick"/>
-
-        <Button
-            android:text="@string/cancel"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/job_buttons_height"
-            android:id="@+id/btnEmployerCancel"
-            android:layout_weight="1"
-            android:background="@color/red"
-            android:textColor="@color/white"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:onClick="onCancelClick"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:text="@string/employer_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lloEmployerTopButtons"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:id="@+id/txvEmpEmployerNameLbl"
-        android:textColor="@color/firebrick"/>
-
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_toEndOf="@+id/txvEmpEmployerNameLbl"
-        android:layout_marginStart="10dp"
-        android:id="@+id/txtEmpEmployerNameVal"
-        android:textColor="?attr/colorPrimaryDark"
-        android:layout_alignBaseline="@+id/txvEmpEmployerNameLbl"/>
-
-    <TextView
-        android:text="@string/contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txvEmpEmployerNameLbl"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:id="@+id/txvEmpContactLbl"
-        android:textColor="@color/firebrick"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_toEndOf="@+id/txvEmpContactLbl"
-        android:layout_marginStart="10dp"
-        android:id="@+id/txtEmpContactVal"
-        android:textColor="?attr/colorPrimaryDark"
-        android:layout_alignBaseline="@+id/txvEmpContactLbl"/>
-
-    <TextView
-        android:text="@string/street"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txvEmpContactLbl"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:id="@+id/txvEmpStreetLbl"
-        android:textColor="@color/firebrick"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        android:ems="10"
-        android:layout_toEndOf="@+id/txvEmpStreetLbl"
-        android:layout_marginStart="10dp"
-        android:id="@+id/txtEmpStreetVal"
-        android:textColor="?attr/colorPrimaryDark"
-        android:layout_alignBaseline="@+id/txvEmpStreetLbl"/>
-
-    <TextView
-        android:text="@string/city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txvEmpCityLbl"
-        android:layout_below="@+id/txvEmpStreetLbl"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:textColor="@color/firebrick"
-        android:gravity="end"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:layout_toEndOf="@+id/txvEmpCityLbl"
-        android:ems="10"
-        android:id="@+id/txtEmpCityVal"
-        android:textColor="?attr/colorPrimaryDark"
-        android:layout_alignBaseline="@+id/txvEmpCityLbl"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtEmpCityVal"
-        android:id="@+id/lloEmpCityState"
-        android:weightSum="6"
-        android:layout_marginTop="10dp">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rdtbEmployer"
+        android:id="@+id/scvEmployer"
+        >
 
         <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/rloEmpState"
-            android:layout_weight="3">
+            android:id="@+id/rloEmployerData">
 
-            <TextView
-                android:text="@string/state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txvEmpStateLbl"
-                android:textColor="@color/firebrick"
-                android:gravity="end"/>
-
-            <EditText
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/txvEmpStateLbl"
-                android:ems="10"
-                android:layout_marginStart="5dp"
-                android:id="@+id/txtEmpStateVal"
-                android:textColor="?attr/colorPrimaryDark"
-                android:layout_alignBaseline="@+id/txvEmpStateLbl"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/tblEmpEmployerData">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/employer_row_height"
+                    android:id="@+id/tbrEmpEmployerName">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/lloEmpEmployerName">
+
+                        <TextView
+                            android:text="@string/employer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="false"
+                            android:id="@+id/txvEmpEmployerNameLbl"
+                            android:textColor="@color/firebrick"
+                            android:gravity="bottom"
+                            android:layout_alignParentLeft="false"
+                            android:layout_alignParentBottom="false"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:layout_toEndOf="@+id/txvEmpEmployerNameLbl"
+                            android:id="@+id/txtEmpEmployerNameVal"
+                            android:textColor="?attr/colorPrimaryDark"
+                            android:layout_marginLeft="10dp"
+                            android:layout_alignParentBottom="false"
+                            android:gravity="bottom|center_vertical"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpContact">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/lloEmpContact">
+
+                        <TextView
+                            android:text="@string/contact"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txvEmpContactLbl"
+                            android:textColor="@color/firebrick"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:layout_marginStart="10dp"
+                            android:id="@+id/txtEmpContactVal"
+                            android:textColor="?attr/colorPrimaryDark"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpStreet">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/lloEmpStreet"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="@string/street"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txvEmpStreetLbl"
+                            android:textColor="@color/firebrick"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPostalAddress"
+                            android:ems="10"
+                            android:layout_marginStart="10dp"
+                            android:id="@+id/txtEmpStreetVal"
+                            android:textColor="?attr/colorPrimaryDark"/>
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpCity">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/lloEmpCity"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="@string/city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txvEmpCityLbl"
+                            android:textColor="@color/firebrick"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/txtEmpCityVal"
+                            android:textColor="?attr/colorPrimaryDark"
+                            android:layout_marginLeft="10dp"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpStateZip">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/lloEmpyStateZip"
+                        android:weightSum="6"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:id="@+id/lloEmpState">
+
+                            <TextView
+                                android:text="@string/state"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txvEmpStateLbl"
+                                android:textColor="@color/firebrick"/>
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:layout_marginStart="5dp"
+                                android:id="@+id/txtEmpStateVal"
+                                android:textColor="?attr/colorPrimaryDark"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:id="@+id/lloEmpZip">
+
+                            <TextView
+                                android:text="@string/zipcode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txvEmpZipcodeLbl"
+                                android:textColor="@color/firebrick"/>
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:layout_marginStart="5dp"
+                                android:id="@+id/txtEmpZipcodeVal"
+                                android:textColor="?attr/colorPrimaryDark"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpPhones">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tblEmpEmployerData"
+                        android:id="@+id/lloEmpPhones"
+                        android:weightSum="2"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/lloEmpPhoneCell"
+                            android:layout_marginRight="5dp">
+
+                            <TextView
+                                android:text="@string/phone_cell_short"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txvEmpPhoneCellLbl"
+                                android:textColor="@color/firebrick"/>
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:layout_marginStart="5dp"
+                                android:id="@+id/txtEmpPhoneCellVal"
+                                android:textColor="?attr/colorPrimaryDark"
+                                android:inputType="phone"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/lloEmpPhoneAlt"
+                            android:layout_marginLeft="5dp">
+
+                            <TextView
+                                android:text="@string/phone_alt_short"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txvEmpPhoneAltLbl"
+                                android:textColor="@color/firebrick"/>
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:layout_marginStart="5dp"
+                                android:id="@+id/txtEmpPhoneAltVal"
+                                android:textColor="?attr/colorPrimaryDark"
+                                android:inputType="phone"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpEmail1">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/lloEmpEmail1">
+
+                        <TextView
+                            android:text="@string/email1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txvEmpEmail1Lbl"
+                            android:textColor="@color/firebrick"
+                            android:gravity="end"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:ems="10"
+                            android:id="@+id/txtEmpEmail1Val"
+                            android:textColor="?attr/colorPrimaryDark"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpEmail2">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/lloEmpEmail2"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="@string/email2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txvEmpEmail2Lbl"
+                            android:textColor="@color/firebrick"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:ems="10"
+                            android:id="@+id/txtEmpEmail2Val"
+                            android:textColor="?attr/colorPrimaryDark"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpWebsite">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/lloEmpWebsite"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="@string/website"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txvEmpWebsiteLbl"
+                            android:textColor="@color/firebrick"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:ems="10"
+                            android:id="@+id/txtEmpWebsiteVal"
+                            android:textColor="?attr/colorPrimaryDark"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpStatus"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/lloEmpStatus">
+
+                        <TextView
+                            android:text="@string/status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txvEmpStatusLbl"
+                            android:textColor="@color/firebrick"/>
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:checkedButton="@+id/radEmpActive"
+                            android:id="@+id/rgpEmpStatus"
+                            android:layout_marginLeft="20dp">
+
+                            <RadioButton
+                                android:text="RadioButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radEmpActive"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:onClick="onRadioButtonClick"/>
+
+                            <RadioButton
+                                android:text="RadioButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radEmpInactive"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:onClick="onRadioButtonClick"
+                                android:layout_marginLeft="40dp"/>
+                        </RadioGroup>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbrEmpNotes">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/lloEmpNotes">
+
+                        <TextView
+                            android:text="@string/notes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txvEmpNotesLbl"
+                            android:textColor="@color/firebrick"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/employer_notes_height"
+                            android:inputType="none"
+                            android:ems="10"
+                            android:id="@+id/txtEmpNotesVal"
+                            android:textColor="?attr/colorPrimaryDark"
+                            android:gravity="top"/>
+                    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+
         </RelativeLayout>
 
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:id="@+id/rloEmpCity"
-            android:layout_marginLeft="10dp">
-
-            <TextView
-                android:text="@string/zipcode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txvEmpZipcodeLbl"
-                android:textColor="@color/firebrick"
-                android:gravity="end"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/txvEmpZipcodeLbl"
-                android:ems="10"
-                android:layout_marginStart="5dp"
-                android:id="@+id/txtEmpZipcodeVal"
-                android:textColor="?attr/colorPrimaryDark"
-                android:layout_alignBaseline="@+id/txvEmpZipcodeLbl"/>
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lloEmpCityState"
-        android:id="@+id/lloEmpPhone"
-        android:weightSum="2"
-        android:layout_marginTop="10dp">
-
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/rloEmpPhoneCell"
-            android:layout_weight="1">
-
-            <TextView
-                android:text="@string/phone_cell_short"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txvEmpPhoneCellLbl"
-                android:textColor="@color/firebrick"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/txvEmpPhoneCellLbl"
-                android:ems="10"
-                android:layout_marginStart="5dp"
-                android:id="@+id/txtEmpPhoneCellVal"
-                android:textColor="?attr/colorPrimaryDark"
-                android:layout_alignBaseline="@+id/txvEmpPhoneCellLbl"
-                android:inputType="phone"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/rloEmpPhoneAlt"
-            android:layout_marginLeft="10dp">
-
-            <TextView
-                android:text="@string/phone_alt_short"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txvEmpPhoneAltLbl"
-                android:textColor="@color/firebrick"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/txvEmpPhoneAltLbl"
-                android:ems="10"
-                android:layout_marginStart="5dp"
-                android:id="@+id/txtEmpPhoneAltVal"
-                android:textColor="?attr/colorPrimaryDark"
-                android:layout_alignBaseline="@+id/txvEmpPhoneAltLbl"
-                android:inputType="phone"/>
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:text="@string/email1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txvEmpEmail1Lbl"
-        android:layout_below="@+id/lloEmpPhone"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/firebrick"
-        android:gravity="end"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:layout_toEndOf="@+id/txvEmpEmail1Lbl"
-        android:ems="10"
-        android:id="@+id/txtEmpEmail1Val"
-        android:textColor="?attr/colorPrimaryDark"
-        android:layout_alignBaseline="@+id/txvEmpEmail1Lbl"/>
-
-    <TextView
-        android:text="@string/email2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txvEmpEmail2Lbl"
-        android:layout_below="@+id/txvEmpEmail1Lbl"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:textColor="@color/firebrick"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:layout_toEndOf="@+id/txvEmpEmail2Lbl"
-        android:ems="10"
-        android:id="@+id/txtEmpEmail2Val"
-        android:textColor="?attr/colorPrimaryDark"
-        android:layout_alignBaseline="@+id/txvEmpEmail2Lbl"/>
-
-    <TextView
-        android:text="@string/website"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txvEmpWebsiteLbl"
-        android:layout_below="@+id/txvEmpEmail2Lbl"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:textColor="@color/firebrick"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="none"
-        android:layout_toEndOf="@+id/txvEmpWebsiteLbl"
-        android:ems="10"
-        android:id="@+id/txtEmpWebsiteVal"
-        android:textColor="?attr/colorPrimaryDark"
-        android:layout_alignBaseline="@+id/txvEmpWebsiteLbl"/>
-
-    <TextView
-        android:text="@string/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txvEmpStatusLbl"
-        android:layout_below="@+id/txvEmpWebsiteLbl"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:textColor="@color/firebrick"/>
-
-    <TextView
-        android:text="@string/notes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txvEmpNotesLbl"
-        android:layout_below="@+id/rgpEmpStatus"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:textColor="@color/firebrick"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/employer_notes_height"
-        android:inputType="none"
-        android:layout_toEndOf="@+id/txvEmpNotesLbl"
-        android:ems="10"
-        android:id="@+id/txtEmpNotesVal"
-        android:textColor="?attr/colorPrimaryDark"
-        android:layout_alignTop="@+id/txvEmpNotesLbl"
-        android:gravity="top|center_vertical"/>
+    </ScrollView>
 
     <TextView
         android:text="Id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/lloEmployerTopButtons"
         android:layout_alignParentStart="true"
         android:id="@+id/txvEmpId"
-        android:textColor="@color/red"/>
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:orientation="horizontal"
-        android:checkedButton="@+id/radEmpActive"
-        android:layout_below="@+id/txvEmpStatusLbl"
-        android:id="@+id/rgpEmpStatus">
-
-        <RadioButton
-            android:text="RadioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radEmpActive"
-            android:textColor="@color/colorPrimaryDark"
-            android:onClick="onRadioButtonClick"/>
-
-        <RadioButton
-            android:text="RadioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radEmpInactive"
-            android:textColor="@color/colorPrimaryDark"
-            android:onClick="onRadioButtonClick"/>
-    </RadioGroup>
+        android:textColor="@color/red"
+        android:layout_alignBottom="@+id/txvEmployerTitle"/>
 
 </RelativeLayout>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,15 +53,12 @@ public class AdapterEmployer extends BaseAdapter {
         }
         if ( holder != null ) {
             if ( mSelectedRow == pPosition ) {
-            	pConvertView.setBackgroundColor(mContext.getResources().getColor(R.color.lightRed));
-            	pConvertView.setBackgroundColor(mContext.getResources().getColor(R.color.lightRed));
+				pConvertView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.lightRed));
             } else {
             	if ( (pPosition % 2) == 1 ) {
-            		pConvertView.setBackgroundColor(mContext.getResources().getColor(R.color.lighterSkyBlue));
-            		pConvertView.setBackgroundColor(mContext.getResources().getColor(R.color.lighterSkyBlue));
+					pConvertView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.lighterSkyBlue));
             	} else {
-            		pConvertView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
-            		pConvertView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+					pConvertView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.moneyGreen));
             	}
             }
         	holder.txvItemText.setText(dataRec.getEmployerName());

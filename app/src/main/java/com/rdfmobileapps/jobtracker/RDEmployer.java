@@ -135,6 +135,23 @@ public class RDEmployer implements Parcelable {
         return (numUpdated == 1);
     }
 
+    private void loadNewEmployerData (Cursor pCursor) {
+        this.setId(pCursor.getInt(0));
+        this.setEmployerName(pCursor.getString(1));
+        this.setContactName(pCursor.getString(2));
+        this.setStreetAddress(pCursor.getString(3));
+        this.setCity(pCursor.getString(4));
+        this.setState(pCursor.getString(5));
+        this.setZipCode(pCursor.getString(6));
+        this.setPhoneCell(pCursor.getString(7));
+        this.setPhoneAlt(pCursor.getString(8));
+        this.setEmail1(pCursor.getString(9));
+        this.setEmail2(pCursor.getString(10));
+        this.setWebsite(pCursor.getString(11));
+        this.setStatus(RDStatus.valueOf(pCursor.getInt(12)));
+        this.setNotes(pCursor.getString(13));
+    }
+
 //  Getters
 
     public int getId() {
@@ -310,23 +327,54 @@ public class RDEmployer implements Parcelable {
         cursor.moveToFirst();
         if (!cursor.isAfterLast()) {
             employer = new RDEmployer();
-            employer.setId(cursor.getInt(0));
-            employer.setEmployerName(cursor.getString(1));
-            employer.setContactName(cursor.getString(2));
-            employer.setStreetAddress(cursor.getString(3));
-            employer.setCity(cursor.getString(4));
-            employer.setState(cursor.getString(5));
-            employer.setZipCode(cursor.getString(6));
-            employer.setPhoneCell(cursor.getString(7));
-            employer.setPhoneAlt(cursor.getString(8));
-            employer.setEmail1(cursor.getString(9));
-            employer.setEmail2(cursor.getString(10));
-            employer.setWebsite(cursor.getString(11));
-            employer.setStatus(RDStatus.valueOf(cursor.getInt(12)));
-            employer.setNotes(cursor.getString(13));
+            employer = new RDEmployer();
+            employer.loadNewEmployerData(cursor);
         }
         cursor.close();
         return employer;
+    }
+
+    public static RDEmployer lookupById(MyDB pDB,
+                                        int pEmployerId) {
+        RDEmployer employer = null;
+        String tables = MyDB.TBL_EMPLOYERS;
+        String[] columns = allColumns;
+        String where = MyDB.COL_EMPLOYERS_ID + " = ?";
+        String[] whereArgs = { String.valueOf(pEmployerId) };
+        String groupBy = "";
+        String having = "";
+        String orderBy = "";
+        SQLiteDatabase database = pDB.getWritableDatabase();
+        Cursor cursor = database.query(tables, columns, where, whereArgs,
+                groupBy, having, orderBy);
+        cursor.moveToFirst();
+        if (!cursor.isAfterLast()) {
+            employer = new RDEmployer();
+            employer.loadNewEmployerData(cursor);
+        }
+        cursor.close();
+        return employer;
+    }
+
+    public static String lookupEmployerName(MyDB pDB,
+                                            int pEmployerId) {
+        String empName = "";
+        String tables = MyDB.TBL_EMPLOYERS;
+        String[] columns = { MyDB.COL_EMPLOYERS_EMPLOYERNAME };
+        String where = MyDB.COL_EMPLOYERS_ID + " = ?";
+        String[] whereArgs = { String.valueOf(pEmployerId) };
+        String groupBy = "";
+        String having = "";
+        String orderBy = "";
+        SQLiteDatabase database = pDB.getWritableDatabase();
+        Cursor cursor = database.query(tables, columns, where, whereArgs,
+                groupBy, having, orderBy);
+        cursor.moveToFirst();
+        if (!cursor.isAfterLast()) {
+            empName = cursor.getString(0);
+        }
+        cursor.close();
+        return empName;
     }
 
 //  Parcelable Implementation

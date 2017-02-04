@@ -9,16 +9,30 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ActivityMain extends Activity {
+import java.util.ArrayList;
+
+public class ActivityMain extends AppCompatActivity {
     private MyDB mDBHelper;
     private Vibrator mVibe;
+    private AdapterJobs mAdapter;
+    private ListView mListView;
+    private ArrayList<RDJob> mJobsList;
+    private boolean mLoading = true;
+    private RDTopButtons mTopButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +41,11 @@ public class ActivityMain extends Activity {
     }
 
     private void doSetup() {
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if ( ViewConfiguration.get(this).hasPermanentMenuKey() ) {
+            this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
         setContentView(R.layout.activity_main);
-//		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mVibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
 //		RDProgramSettings pgmSettings = RDProgramSettings.getInstance(this);
         mDBHelper = MyDB.getInstance(this, RDConstants.DBNAME);
@@ -45,35 +59,74 @@ public class ActivityMain extends Activity {
             checkPermissions();
         }
         setupScreenControls();
+        setupCustomActionBar();
+    }
+
+    private void setupCustomActionBar() {
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
+        View view =getSupportActionBar().getCustomView();
+        TextView version = (TextView)findViewById(R.id.txvABVersion);
+        RDVersion versionInfo = new RDVersion(this);
+        version.setText(versionInfo.getVersionNum(true));
     }
 
     private void setupScreenControls() {
+        setupTopButtons();
         setupListView();
-        setupVersionLabel();
+    }
+
+    private void setupTopButtons() {
+        mTopButtons = (RDTopButtons)findViewById(R.id.rdtbMain);
+        mTopButtons.setOnRDTBClickedListener(new RDTopButtons.OnRDTBClickedListener() {
+            @Override
+            public void onCancelClick() {
+
+            }
+
+            @Override
+            public void onSaveClick() {
+
+            }
+
+            @Override
+            public void onCustomClick() {
+                RDJob newJob = new RDJob();
+                showJobActivity(newJob);
+            }
+        });
     }
 
     private void setupListView() {
-/*
-//  rdfrahm  2016-07-13  1.2.3  Pass true to pActiveOnly parameter
-//        mVehiclesList = RDVehicle.vehiclesList(mDBHelper, true);
-        mVehiclesList = RDVehicle.vehiclesList(mDBHelper, true, true);
-//  rdfrahm  2016-07-13  1.2.3  End
-        mAdapter = new AdapterMain(this, mDBHelper, mVehiclesList);
-        mListView = (ListView)findViewById(R.id.lsvMainVehicles);
+        mAdapter = new AdapterJobs(this, mJobsList);
+        mListView = (ListView)findViewById(R.id.lsvMainJobs);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 mVibe.vibrate(RDConstants.BUTTON_VIBRATE_DURATION);
-                showChanges(position);
+                showWorklogs(position);
+//                showJob(position);
             }
-        }); */
+        });
     }
 
-    private void setupVersionLabel() {
-        TextView tv = (TextView)findViewById(R.id.txvMainVersion);
-        RDVersion versionInfo = new RDVersion(this);
-        tv.setText(versionInfo.getVersionNum(true));
+    private void getJobsList() {
+//        mJobs = RDJob.jobsList(mDBHelper, !mShowAllCheckBox.isChecked());
+        mJobsList = RDJob.jobsList(mDBHelper, false);
+    }
+
+    private void showJob(int pRowNum) {
+        RDJob job = mJobsList.get(pRowNum);
+        showJobActivity(job);
+    }
+
+    private void showWorklogs(int pRowNum) {
+        RDJob job = mJobsList.get(pRowNum);
+        Intent intent = new Intent(this, ActivityWorklogs.class);
+        intent.putExtra(RDConstants.EXTRAKEY_JOB, job);
+        startActivity(intent);
     }
 
     private void checkPermissions() {
@@ -100,6 +153,24 @@ public class ActivityMain extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //respond to menu item selection
+        switch (item.getItemId()) {
+            case R.id.action_about:
+                showAboutActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[],
                                            int[] grantResults) {
@@ -117,15 +188,18 @@ public class ActivityMain extends Activity {
         }
     }
 
-    public void infoButtonClick(View pView) {
+    private void showAboutActivity() {
         Intent intent = new Intent(this, ActivityAbout.class);
         startActivity(intent);
     }
 
-    public void newJobClick(View pView) {
-        RDJob newJob = new RDJob();
+    public void infoButtonClick(View pView) {
+        showAboutActivity();
+    }
+
+    private void showJobActivity(RDJob pJob) {
         Intent intent = new Intent(this, ActivityJob.class);
-        intent.putExtra(RDConstants.EXTRAKEY_JOB, newJob);
+        intent.putExtra(RDConstants.EXTRAKEY_JOB, pJob);
         startActivity(intent);
     }
 
@@ -134,4 +208,13 @@ public class ActivityMain extends Activity {
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+//        if (!mLoading) {
+            getJobsList();
+            mAdapter.refreshList(mJobsList);
+//        }
+        mLoading = false;
+    }
 }

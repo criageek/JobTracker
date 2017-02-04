@@ -20,6 +20,7 @@ public class RDConstants {
 /*******************************************************************/
 	public static final String EXTRAKEY_JOB = "JOB";
 	public static final String EXTRAKEY_EMPLOYER = "EMPLOYER";
+	public static final String EXTRAKEY_WORKLOG = "WORKLOG";
 
 /*******************************************************************/
 /*  Intent Request constants                                       */
@@ -64,6 +65,7 @@ public class RDConstants {
 
 	public static final String COPYRIGHT = "\u00A9" + "2017  RDF Mobile Apps";
 
+	public static final String INVALID = "INVALID";
 }
 
 

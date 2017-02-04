@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/top_button_height"
+              android:id="@+id/rd_top_buttons">
+
+    <Button
+        android:text="@string/save"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/rdtb_save"
+        android:layout_weight="1"
+        android:layout_marginRight="5dp"
+        android:background="@color/button_save_background_color"
+        android:textColor="@color/button_save_text_color"/>
+
+    <Button
+        android:text="@string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/rdtb_cancel"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/button_cancel_background_color"
+        android:textColor="@color/button_cancel_text_color"/>
+
+    <Button
+        android:text="@string/custom"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/rdtb_custom"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:background="@color/button_custom_background_color"
+        android:textColor="@color/button_custom_text_color"/>
+
+</LinearLayout>
